@@ -1,0 +1,17 @@
+---
+# tasks file for openvpn (Ubuntu specific)
+
+- name: Install OpenVPN packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items: openvpn_packages
+  tags: openvpn
+
+- name: Create OpenVPN defaults configuration
+  template: >
+    src=openvpn.default.j2
+    dest=/etc/default/openvpn
+    owner=root
+    group=root
+    mode=0644
+  notifies: restart openvpn
+  tags: openvpn

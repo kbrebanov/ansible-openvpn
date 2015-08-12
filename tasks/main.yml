@@ -1,2 +1,22 @@
 ---
-# tasks file for ansible-openvpn
+# tasks file for openvpn
+
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags: openvpn
+
+- include: CentOS.yml
+  when: ansible_distribution == "CentOS"
+  tags: openvpn
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+  tags: openvpn
+
+- include: Alpine.yml
+  when: ansible_distribution == "Alpine"
+  tags: openvpn
+
+- name: Ensure OpenVPN service is started and enabled on boot
+  service: name={{ openvpn_service_name }} state=started enabled=yes
+  tags: openvpn
