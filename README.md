@@ -11,7 +11,9 @@ This role requires Ansible 1.4 or higher.
 Role Variables
 --------------
 
-None
+| Name            | Default | Description                   |
+|-----------------|---------|-------------------------------|
+| openvpn_version | 2.3.8   | Version of OpenVPN to install |
 
 Dependencies
 ------------
@@ -23,9 +25,18 @@ Example Playbook
 
 Install OpenVPN
 ```
-- hosts: servers
+- hosts: all
   roles:
-    - { role: kbrebanov.openvpn }
+    - kbrebanov.openvpn
+```
+
+Install older version of OpenVPN
+```
+- hosts: all
+  vars:
+    openvpn_version: 2.3.6
+  roles:
+    - kbrebanov.openvpn
 ```
 
 License

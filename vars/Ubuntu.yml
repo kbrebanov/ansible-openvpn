@@ -2,5 +2,5 @@
 # vars file for openvpn (Ubuntu specific)
 
 openvpn_packages:
-  - openvpn
+  - openvpn={{ openvpn_version }}*
 openvpn_service_name: openvpn

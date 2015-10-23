@@ -1,2 +1,4 @@
 ---
 # defaults file for openvpn
+
+openvpn_version: 2.3.8

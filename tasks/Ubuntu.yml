@@ -1,6 +1,18 @@
 ---
 # tasks file for openvpn (Ubuntu specific)
 
+- name: Install OpenVPN GPG key
+  apt_key: >
+    url=https://swupdate.openvpn.net/repos/repo-public.gpg
+    state=present
+  tags: openvpn
+
+- name: Add OpenVPN repository
+  apt_repository: >
+    repo='deb http://swupdate.openvpn.net/apt trusty main'
+    state=present
+  tags: openvpn
+
 - name: Install OpenVPN packages
   apt: name={{ item }} state=present update_cache=yes
   with_items: openvpn_packages
