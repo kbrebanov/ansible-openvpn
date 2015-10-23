@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+
+{% if openvpn_comp_lzo %}
+comp-lzo
+{% endif %}
+{% if openvpn_daemon %}
+daemon
+{% endif %}
+dev {{ openvpn_dev }}
+ifconfig {{ openvpn_ifconfig_server }} {{ openvpn_ifconfig_client }}
+group {{ openvpn_group }}
+{% if openvpn_keepalive %}
+keepalive {{ openvpn_keepalive }}
+{% endif %}
+{% if openvpn_persist_key %}
+persist-key
+{% endif %}
+{% if openvpn_persist_tun %}
+persist-tun
+{% endif %}
+{% if openvpn_ping_timer_rem %}
+ping-timer-rem
+{% endif %}
+secret {{ openvpn_secret }}
+user {{ openvpn_user }}

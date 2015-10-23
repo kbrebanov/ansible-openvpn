@@ -13,6 +13,37 @@
   when: ansible_distribution == "Ubuntu"
   tags: openvpn
 
+- name: Create OpenVPN defaults configuration file
+  template: >
+    src=openvpn.default.j2
+    dest=/etc/default/openvpn
+    owner=root
+    group=root
+    mode=0644
+  tags: openvpn
+
+- name: Create OpenVPN client configuration file
+  template: >
+    src=client.conf.j2
+    dest=/etc/openvpn/client.conf
+    owner=root
+    group=root
+    mode=0644
+  notify: restart openvpn
+  when: openvpn_client
+  tags: openvpn
+
+- name: Create OpenVPN server configuration file
+  template: >
+    src=server.conf.j2
+    dest=/etc/openvpn/server.conf
+    owner=root
+    group=root
+    mode=0644
+  notify: restart openvpn
+  when: openvpn_server
+  tags: openvpn
+
 - name: Ensure OpenVPN service is started and enabled on boot
   service: name={{ openvpn_service_name }} state=started enabled=yes
   tags: openvpn

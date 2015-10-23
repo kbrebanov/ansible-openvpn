@@ -1,2 +1,4 @@
 ---
 # vars file for openvpn
+
+openvpn_secret: /etc/openvpn/static.key
