@@ -6,19 +6,19 @@ openvpn_version: 2.3.8
 openvpn_client: true
 openvpn_server: false
 
+openvpn_static_secret: ''
+
 openvpn_comp_lzo: true
 openvpn_daemon: true
 openvpn_dev: tun
 openvpn_ifconfig_client: 10.8.0.2
 openvpn_ifconfig_server: 10.8.0.1
-openvpn_group: nobody
 openvpn_keepalive: '10 60'
 openvpn_nobind: true
 openvpn_persist_key: true
 openvpn_persist_tun: true
 openvpn_ping_timer_rem: true
 openvpn_proto: udp
-openvpn_remote_host: ''
+openvpn_remote_host: "remote.change.me"
 openvpn_remote_port: 1194
 openvpn_remote_proto: "{{ openvpn_proto }}"
-openvpn_user: nobody

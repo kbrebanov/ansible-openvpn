@@ -44,6 +44,16 @@
   when: openvpn_server
   tags: openvpn
 
+- name: Create OpenVPN static key
+  template: >
+    src=static.key.j2
+    dest=/etc/openvpn/static.key
+    owner=root
+    group=root
+    mode=0600
+  notify: restart openvpn
+  tags: openvpn
+
 - name: Ensure OpenVPN service is started and enabled on boot
   service: name={{ openvpn_service_name }} state=started enabled=yes
   tags: openvpn

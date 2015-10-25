@@ -4,3 +4,5 @@
 openvpn_packages:
   - openvpn={{ openvpn_version }}*
 openvpn_service_name: openvpn
+openvpn_user: nobody
+openvpn_group: nogroup
