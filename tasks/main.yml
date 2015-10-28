@@ -47,7 +47,7 @@
 - name: Create OpenVPN static key
   template: >
     src=static.key.j2
-    dest=/etc/openvpn/static.key
+    dest={{ openvpn_secret_file }}
     owner=root
     group=root
     mode=0600

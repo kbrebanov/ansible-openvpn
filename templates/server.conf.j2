@@ -7,7 +7,7 @@ comp-lzo
 daemon
 {% endif %}
 dev {{ openvpn_dev }}
-ifconfig {{ openvpn_ifconfig_server }} {{ openvpn_ifconfig_client }}
+ifconfig {{ openvpn_server_ifconfig }}
 group {{ openvpn_group }}
 {% if openvpn_keepalive %}
 keepalive {{ openvpn_keepalive }}
@@ -21,5 +21,5 @@ persist-tun
 {% if openvpn_ping_timer_rem %}
 ping-timer-rem
 {% endif %}
-secret {{ openvpn_secret }}
+secret {{ openvpn_secret_file }}
 user {{ openvpn_user }}

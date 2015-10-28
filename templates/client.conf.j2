@@ -8,7 +8,7 @@ daemon
 {% endif %}
 dev {{ openvpn_dev }}
 group {{ openvpn_group }}
-ifconfig {{ openvpn_ifconfig_client }} {{ openvpn_ifconfig_server }}
+ifconfig {{ openvpn_client_ifconfig }}
 {% if openvpn_keepalive %}
 keepalive {{ openvpn_keepalive }}
 {% endif %}
@@ -25,6 +25,6 @@ persist-tun
 ping-timer-rem
 {% endif %}
 proto {{ openvpn_proto }}
-secret {{ openvpn_secret }}
+secret {{ openvpn_secret_file }}
 remote {{ openvpn_remote_host }} {{ openvpn_remote_port }} {{ openvpn_remote_proto }}
 user {{ openvpn_user }}
