@@ -1,6 +1,8 @@
 openvpn
 =======
 
+[![Ansible Role](https://img.shields.io/ansible/role/5761.svg)](https://galaxy.ansible.com/list#/roles/5761)
+
 Installs and configures OpenVPN
 
 Requirements
