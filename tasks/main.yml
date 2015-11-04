@@ -52,6 +52,35 @@
     group=root
     mode=0600
   notify: restart openvpn
+  when: openvpn_static
+  tags: openvpn
+
+- name: Copy DH to OpenVPN directory
+  command: "cp {{ easy_rsa_key_dir }}/dh{{ easy_rsa_key_size }}.pem /etc/openvpn/"
+  args:
+    creates: "/etc/openvpn/dh{{ easy_rsa_key_size }}.pem"
+  when: not openvpn_static
+  tags: openvpn
+
+- name: Copy CA certificate to OpenVPN directory
+  command: "cp {{ easy_rsa_key_dir }}/ca.crt /etc/openvpn/"
+  args:
+    creates: /etc/openvpn/ca.crt
+  when: not openvpn_static
+  tags: openvpn
+
+- name: Copy TLS server certificate to OpenVPN directory
+  command: "cp {{ easy_rsa_key_dir }}/server.crt /etc/openvpn/"
+  args:
+    creates: /etc/openvpn/server.crt
+  when: not openvpn_static
+  tags: openvpn
+
+- name: Copy TLS server key to OpenVPN directory
+  command: "cp {{ easy_rsa_key_dir }}/server.key /etc/openvpn/"
+  args:
+    creates: /etc/openvpn/server.key
+  when: not openvpn_static
   tags: openvpn
 
 - name: Ensure OpenVPN service is started and enabled on boot
