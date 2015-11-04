@@ -9,6 +9,9 @@ cert {{ easy_rsa_key_name }}.crt
 {% if openvpn_comp_lzo %}
 comp-lzo
 {% endif %}
+{% if not openvpn_static %}
+crl-verify crl.pem
+{% endif %}
 {% if openvpn_daemon %}
 daemon
 {% endif %}

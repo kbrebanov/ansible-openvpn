@@ -83,6 +83,13 @@
   when: not openvpn_static
   tags: openvpn
 
+- name: Copy CRL file to OpenVPN directory
+  command: "cp {{ easy_rsa_key_dir }}/crl.pem /etc/openvpn/"
+  args:
+    creates: /etc/openvpn/crl.pem
+  when: not openvpn_static
+  tags: openvpn
+
 - name: Ensure OpenVPN service is started and enabled on boot
   service: name={{ openvpn_service_name }} state=started enabled=yes
   tags: openvpn
