@@ -90,6 +90,15 @@
   when: not openvpn_static
   tags: openvpn
 
+- name: Create client configuration template
+  template: >
+    src=client.ovpn.j2
+    dest=/etc/openvpn/client.ovpn
+    owner=root
+    group=root
+    mode=0644
+  tags: openvpn
+
 - name: Ensure OpenVPN service is started and enabled on boot
   service: name={{ openvpn_service_name }} state=started enabled=yes
   tags: openvpn
