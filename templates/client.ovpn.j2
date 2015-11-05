@@ -5,10 +5,9 @@ proto {{ openvpn_proto }}
 remote {{ openvpn_remote_host }} {{ openvpn_remote_port }}
 resolv-retry infinite
 nobind
-user {{ openvpn_user }}
-group {{ openvpn_group }}
 persist-key
 persist-tun
+pull
 ns-cert-type server
 comp-lzo
 verb 3

@@ -22,6 +22,9 @@ dh dh{{ easy_rsa_key_size }}.pem
 {% if openvpn_static %}
 ifconfig {{ openvpn_server_ifconfig }}
 {% endif %}
+{% if openvpn_ifconfig_pool_persist %}
+ifconfig-pool-persist {{ openvpn_ifconfig_pool_persist }}
+{% endif %}
 group {{ openvpn_group }}
 {% if openvpn_keepalive %}
 keepalive {{ openvpn_keepalive }}
@@ -48,6 +51,12 @@ push "redirect-gateway def1 bypass-dhcp"
 {% endif %}
 {% if openvpn_static %}
 secret {{ openvpn_secret_file }}
+{% endif %}
+{% if not openvpn_static %}
+server {{ openvpn_server_subnet }} {{ openvpn_server_subnet_mask }}
+{% endif %}
+{% if openvpn_status %}
+status {{ openvpn_status }}
 {% endif %}
 {% if not openvpn_static %}
 tls-server

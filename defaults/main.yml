@@ -19,6 +19,7 @@ openvpn_daemon: true
 openvpn_dhcp_option_dns:
   - 208.67.222.222
   - 208.67.220.220
+openvpn_ifconfig_pool_persist: ipp.txt
 openvpn_keepalive: '10 60'
 openvpn_nobind: true
 openvpn_persist_key: true
@@ -30,3 +31,6 @@ openvpn_remote_host: ''
 openvpn_remote_port: 1194
 openvpn_remote_proto: "{{ openvpn_proto }}"
 openvpn_secret: ''
+openvpn_server_subnet: 10.8.0.0
+openvpn_server_subnet_mask: 255.255.255.0
+openvpn_status: openvpn-status.log
