@@ -41,6 +41,9 @@ persist-tun
 {% if openvpn_ping_timer_rem %}
 ping-timer-rem
 {% endif %}
+{% if openvpn_auth_enable %}
+plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
+{% endif %}
 {% if not openvpn_static and openvpn_dhcp_option_dns %}
 {% for dns in openvpn_dhcp_option_dns %}
 push "dhcp-option DNS {{ dns }}"

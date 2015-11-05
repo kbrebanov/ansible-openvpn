@@ -8,6 +8,8 @@ openvpn_static: false
 openvpn_client: false
 openvpn_server: false
 
+openvpn_auth_enable: false
+
 openvpn_client_endpoint: 10.8.0.2
 openvpn_server_endpoint: 10.8.0.1
 openvpn_client_ifconfig: "{{ openvpn_client_endpoint }} {{ openvpn_server_endpoint }}"

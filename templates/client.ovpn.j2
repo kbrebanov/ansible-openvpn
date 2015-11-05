@@ -1,4 +1,7 @@
 tls-client
+{% if openvpn_auth_enable %}
+auth-user-pass
+{% endif %}
 dev {{ openvpn_dev }}
 ;dev-node MyTap
 proto {{ openvpn_proto }}

@@ -31,6 +31,7 @@ Role Variables
 | openvpn_static                | false                                                         | Enable to configure a static key tunnel instead of TLS                                                 |
 | openvpn_client                | false                                                         | Configure OpenVPN client                                                                               |
 | openvpn_server                | false                                                         | Configure OpenVPN server                                                                               |
+| openvpn_auth_enable           | false                                                         | Enable user authentication                                                                             |
 | openvpn_client_endpoint       | 10.8.0.2                                                      | Client side endpoint address                                                                           |
 | openvpn_server_endpoint       | 10.8.0.1                                                      | Server side endpoint address                                                                           |
 | openvpn_client_ifconfig       | "{{ openvpn_client_endpoint }} {{ openvpn_server_endpoint }}" | Client ifconfig setting                                                                                |
