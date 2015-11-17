@@ -90,6 +90,12 @@
   when: not openvpn_static
   tags: openvpn
 
+- name: Get contents of CA certificate
+  slurp: src=/etc/openvpn/ca.crt
+  register: ca_certificate
+  when: not openvpn_static
+  tags: openvpn
+
 - name: Create client configuration template
   template: >
     src=client.ovpn.j2
@@ -97,6 +103,7 @@
     owner=root
     group=root
     mode=0644
+  when: not openvpn_static
   tags: openvpn
 
 - name: Ensure OpenVPN service is started and enabled on boot
