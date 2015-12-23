@@ -17,3 +17,13 @@
   apt: name={{ item }} state=present update_cache=yes
   with_items: openvpn_packages
   tags: openvpn
+
+- name: Hold OpenVPN version
+  shell: echo 'openvpn hold' | dpkg --set-selections
+  when: openvpn_version_hold
+  tags: openvpn
+
+- name: Unhold OpenVPN version
+  shell: echo 'openvpn install' | dpkg --set-selections
+  when: not openvpn_version_hold
+  tags: openvpn
