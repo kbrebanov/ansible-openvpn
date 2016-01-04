@@ -1,7 +1,7 @@
 ---
 # defaults file for openvpn
 
-openvpn_version: 2.3.8
+openvpn_version: 2.3.9
 
 openvpn_static: false
 
