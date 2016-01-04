@@ -28,7 +28,6 @@ Role Variables
 | Name                          | Default                                                       | Description                                                                                            |
 |-------------------------------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | openvpn_version               | 2.3.8                                                         | Version of OpenVPN to install                                                                          |
-| openvpn_version_hold          | true                                                          | Prevent OpenVPN version from being upgraded                                                            |                    
 | openvpn_static                | false                                                         | Enable to configure a static key tunnel instead of TLS                                                 |
 | openvpn_client                | false                                                         | Configure OpenVPN client                                                                               |
 | openvpn_server                | false                                                         | Configure OpenVPN server                                                                               |
