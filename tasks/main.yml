@@ -70,16 +70,16 @@
   tags: openvpn
 
 - name: Copy TLS server certificate to OpenVPN directory
-  command: "cp {{ easy_rsa_key_dir }}/server.crt /etc/openvpn/"
+  command: "cp {{ easy_rsa_key_dir }}/{{ easy_rsa_key_name }}.crt /etc/openvpn/"
   args:
-    creates: /etc/openvpn/server.crt
+    creates: "/etc/openvpn/{{ easy_rsa_key_name }}.crt"
   when: not openvpn_static
   tags: openvpn
 
 - name: Copy TLS server key to OpenVPN directory
-  command: "cp {{ easy_rsa_key_dir }}/server.key /etc/openvpn/"
+  command: "cp {{ easy_rsa_key_dir }}/{{ easy_rsa_key_name }}.key /etc/openvpn/"
   args:
-    creates: /etc/openvpn/server.key
+    creates: "/etc/openvpn/{{ easy_rsa_key_name }}.key"
   when: not openvpn_static
   tags: openvpn
 
