@@ -22,6 +22,12 @@ To setup a TLS server
 
 1. Enable **openvpn_server**
 
+To setup a TLS client
+
+1. Enable **openvpn_client**
+2. Set **openvpn_ca_certificate**, **openvpn_client_certificate** and **openvpn_client_key**
+3. Set **openvpn_remote_host** to name or IP of the remote OpenVPN server
+
 Role Variables
 --------------
 
@@ -36,6 +42,7 @@ Role Variables
 | openvpn_server_endpoint       | 10.8.0.1                                                      | Server side endpoint address                                                                           |
 | openvpn_client_ifconfig       | "{{ openvpn_client_endpoint }} {{ openvpn_server_endpoint }}" | Client ifconfig setting                                                                                |
 | openvpn_server_ifconfig       | "{{ openvpn_server_endpoint }} {{ openvpn_client_endpoint }}" | Server ifconfig setting                                                                                |
+| openvpn_client_pull           | false                                                         | Indicates to OpenVPN client that it should accept options pushed by the server                         |
 | openvpn_dev                   | tun                                                           | VPN device                                                                                             |
 | openvpn_comp_lzo              | true                                                          | Enable or disable compression                                                                          |
 | openvpn_daemon                | true                                                          | Run OpenVPN as a daemon                                                                                |
@@ -43,6 +50,7 @@ Role Variables
 | openvpn_ifconfig_pool_persist | ipp.txt                                                       | Persist/unpersist ifconfig-pool data to file                                                           |
 | openvpn_keepalive             | '10 60'                                                       | Set timeouts                                                                                           |
 | openvpn_nobind                | true                                                          | Do not bind to local address and port                                                                  |
+| openvpn_ns_cert_type          | ''                                                            | Require that peer certificate was signed with explicit nsCertType designation of "client" or "server"  |
 | openvpn_persist_key           | true                                                          | Don't re-read key files across SIGUSR1 or --ping-restart                                               |
 | openvpn_persist_tun           | true                                                          | Don't close and reopen TUN/TAP device or run up/down scripts across SIGUSR1 or --ping-restart restarts |
 | openvpn_ping_timer_rem        | true                                                          | Run the --ping-exit / --ping-restart timer only if we have a remote address                            |
@@ -51,10 +59,15 @@ Role Variables
 | openvpn_remote_host           | ''                                                            | Remote host name or IP address                                                                         |
 | openvpn_remote_port           | 1194                                                          | Remote host port                                                                                       |
 | openvpn_remote_proto          | "{{ openvpn_proto }}"                                         | Remote host protocol                                                                                   |
+| openvpn_resolv_retry          | infinite                                                      | If hostname resolve fails for --remote, retry resolve for n seconds before failing                     |
 | openvpn_secret                | ''                                                            | Secret static key                                                                                      |
 | openvpn_server_subnet         | 10.8.0.0                                                      | OpenVPN TLS server subnet address                                                                      |
 | openvpn_server_subnet_mask    | 255.255.255.0                                                 | OpenVPN TLS server subnet mask                                                                         |
 | openvpn_status                | openvpn-status.log                                            | Write operational status to file                                                                       |
+| openvpn_verb                  | 1                                                             | Set output verbosity                                                                                   |
+| openvpn_ca_certificate        | ''                                                            | Specify CA certificate content for client configuration                                                |
+| openvpn_client_certificate    | ''                                                            | Specify client certificate content for client configuration                                            |
+| openvpn_client_key            | ''                                                            | Specify client key content for client configuration                                                    |
 
 Dependencies
 ------------
@@ -102,6 +115,22 @@ Install OpenVPN server using TLS and redirect all client traffic thru tunnel
   vars:
     openvpn_server: true
     openvpn_redirect_gateway: true
+  roles:
+    - kbrebanov.openvpn
+```
+
+Install OpenVPN client using TLS
+```
+- hosts: all
+  vars:
+    openvpn_client: true
+    openvpn_remote_host: 'remote.vpn.com'
+    openvpn_ca_certificate: |
+      CA cert contents
+    openvpn_client_certificate: |
+      client cert contents
+    openvpn_client_key: |
+      client key contents
   roles:
     - kbrebanov.openvpn
 ```

@@ -1,5 +1,8 @@
 # {{ ansible_managed }}
 
+{% if openvpn_auth_enable %}
+auth-user-pass
+{% endif %}
 {% if openvpn_comp_lzo %}
 comp-lzo
 {% endif %}
@@ -8,12 +11,17 @@ daemon
 {% endif %}
 dev {{ openvpn_dev }}
 group {{ openvpn_group }}
+{% if openvpn_static %}
 ifconfig {{ openvpn_client_ifconfig }}
+{% endif %}
 {% if openvpn_keepalive %}
 keepalive {{ openvpn_keepalive }}
 {% endif %}
 {% if openvpn_nobind %}
 nobind
+{% endif %}
+{% if openvpn_ns_cert_type %}
+ns-cert-type {{ openvpn_ns_cert_type }}
 {% endif %}
 {% if openvpn_persist_key %}
 persist-key
@@ -25,6 +33,36 @@ persist-tun
 ping-timer-rem
 {% endif %}
 proto {{ openvpn_proto }}
+{% if openvpn_pull %}
+pull
+{% endif %}
+{% if openvpn_static %}
 secret {{ openvpn_secret_file }}
+{% endif %}
 remote {{ openvpn_remote_host }} {{ openvpn_remote_port }} {{ openvpn_remote_proto }}
+{% if openvpn_resolv_retry %}
+resolv-retry {{ openvpn_resolv_retry }}
+{% endif %}
+{% if not openvpn_static %}
+tls-client
+{% endif %}
 user {{ openvpn_user }}
+{% if openvpn_verb %}
+verb {{ openvpn_verb }}
+{% endif %}
+
+{% if openvpn_ca_certificate %}
+<ca>
+{{ openvpn_ca_certificate }}
+</ca>
+{% endif %}
+{% if openvpn_client_certificate %}
+<cert>
+{{ openvpn_client_certificate }}
+</cert>
+{% endif %}
+{% if openvpn_client_key %}
+<key>
+{{ openvpn_client_key }}
+</key>
+{% endif %}

@@ -15,6 +15,7 @@ openvpn_server_endpoint: 10.8.0.1
 openvpn_client_ifconfig: "{{ openvpn_client_endpoint }} {{ openvpn_server_endpoint }}"
 openvpn_server_ifconfig: "{{ openvpn_server_endpoint }} {{ openvpn_client_endpoint }}"
 
+openvpn_client_pull: false
 openvpn_dev: tun
 openvpn_comp_lzo: true
 openvpn_daemon: true
@@ -24,6 +25,7 @@ openvpn_dhcp_option_dns:
 openvpn_ifconfig_pool_persist: ipp.txt
 openvpn_keepalive: '10 60'
 openvpn_nobind: true
+openvpn_ns_cert_type: ''
 openvpn_persist_key: true
 openvpn_persist_tun: true
 openvpn_ping_timer_rem: true
@@ -32,7 +34,13 @@ openvpn_redirect_gateway: false
 openvpn_remote_host: ''
 openvpn_remote_port: 1194
 openvpn_remote_proto: "{{ openvpn_proto }}"
+openvpn_resolv_retry: infinite
 openvpn_secret: ''
 openvpn_server_subnet: 10.8.0.0
 openvpn_server_subnet_mask: 255.255.255.0
 openvpn_status: openvpn-status.log
+openvpn_verb: 3
+
+openvpn_ca_certificate: ''
+openvpn_client_certificate: ''
+openvpn_client_key: ''
