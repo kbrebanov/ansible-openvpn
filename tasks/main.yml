@@ -59,41 +59,41 @@
   command: "cp {{ easy_rsa_key_dir }}/dh{{ easy_rsa_key_size }}.pem /etc/openvpn/"
   args:
     creates: "/etc/openvpn/dh{{ easy_rsa_key_size }}.pem"
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Copy CA certificate to OpenVPN directory
   command: "cp {{ easy_rsa_key_dir }}/ca.crt /etc/openvpn/"
   args:
     creates: /etc/openvpn/ca.crt
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Copy TLS server certificate to OpenVPN directory
   command: "cp {{ easy_rsa_key_dir }}/{{ easy_rsa_key_name }}.crt /etc/openvpn/"
   args:
     creates: "/etc/openvpn/{{ easy_rsa_key_name }}.crt"
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Copy TLS server key to OpenVPN directory
   command: "cp {{ easy_rsa_key_dir }}/{{ easy_rsa_key_name }}.key /etc/openvpn/"
   args:
     creates: "/etc/openvpn/{{ easy_rsa_key_name }}.key"
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Copy CRL file to OpenVPN directory
   command: "cp {{ easy_rsa_key_dir }}/crl.pem /etc/openvpn/"
   args:
     creates: /etc/openvpn/crl.pem
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Get contents of CA certificate
   slurp: src=/etc/openvpn/ca.crt
   register: ca_certificate
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Create client configuration template
@@ -103,7 +103,7 @@
     owner=root
     group=root
     mode=0644
-  when: not openvpn_static
+  when: when openvpn_server and not openvpn_static
   tags: openvpn
 
 - name: Ensure OpenVPN service is started and enabled on boot
