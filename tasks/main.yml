@@ -28,7 +28,7 @@
     dest=/etc/openvpn/client.conf
     owner=root
     group=root
-    mode=0644
+    mode=0640
   notify: restart openvpn
   when: openvpn_client
   tags: openvpn
@@ -102,7 +102,7 @@
     dest=/etc/openvpn/client.ovpn
     owner=root
     group=root
-    mode=0644
+    mode=0640
   when: openvpn_server and not openvpn_static
   tags: openvpn
 
