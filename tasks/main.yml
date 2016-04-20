@@ -3,109 +3,143 @@
 
 - name: Include distribution specific variables
   include_vars: "{{ ansible_distribution }}.yml"
-  tags: openvpn
+  tags:
+    - openvpn
 
 - include: CentOS.yml
   when: ansible_distribution == "CentOS"
-  tags: openvpn
+  tags:
+    - openvpn
 
 - include: Ubuntu.yml
   when: ansible_distribution == "Ubuntu"
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Create OpenVPN defaults configuration file
-  template: >
-    src=openvpn.default.j2
-    dest=/etc/default/openvpn
-    owner=root
-    group=root
-    mode=0644
-  tags: openvpn
+  become: yes
+  template:
+    src: openvpn.default.j2
+    dest: /etc/default/openvpn
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - openvpn
 
 - name: Create OpenVPN client configuration file
-  template: >
-    src=client.conf.j2
-    dest=/etc/openvpn/client.conf
-    owner=root
-    group=root
-    mode=0640
-  notify: restart openvpn
+  become: yes
+  template:
+    src: client.conf.j2
+    dest: /etc/openvpn/client.conf
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - restart openvpn
   when: openvpn_client
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Create OpenVPN server configuration file
-  template: >
-    src=server.conf.j2
-    dest=/etc/openvpn/server.conf
-    owner=root
-    group=root
-    mode=0644
-  notify: restart openvpn
+  become: yes
+  template:
+    src: server.conf.j2
+    dest: /etc/openvpn/server.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart openvpn
   when: openvpn_server
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Create OpenVPN static key
-  template: >
-    src=static.key.j2
-    dest={{ openvpn_secret_file }}
-    owner=root
-    group=root
-    mode=0600
-  notify: restart openvpn
+  become: yes
+  template:
+    src: static.key.j2
+    dest: "{{ openvpn_secret_file }}"
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - restart openvpn
   when: openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Copy DH to OpenVPN directory
+  become: yes
   command: "cp {{ easy_rsa_key_dir }}/dh{{ easy_rsa_key_size }}.pem /etc/openvpn/"
   args:
     creates: "/etc/openvpn/dh{{ easy_rsa_key_size }}.pem"
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Copy CA certificate to OpenVPN directory
+  become: yes
   command: "cp {{ easy_rsa_key_dir }}/ca.crt /etc/openvpn/"
   args:
     creates: /etc/openvpn/ca.crt
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Copy TLS server certificate to OpenVPN directory
+  become: yes
   command: "cp {{ easy_rsa_key_dir }}/{{ easy_rsa_key_name }}.crt /etc/openvpn/"
   args:
     creates: "/etc/openvpn/{{ easy_rsa_key_name }}.crt"
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Copy TLS server key to OpenVPN directory
+  become: yes
   command: "cp {{ easy_rsa_key_dir }}/{{ easy_rsa_key_name }}.key /etc/openvpn/"
   args:
     creates: "/etc/openvpn/{{ easy_rsa_key_name }}.key"
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Copy CRL file to OpenVPN directory
+  become: yes
   command: "cp {{ easy_rsa_key_dir }}/crl.pem /etc/openvpn/"
   args:
     creates: /etc/openvpn/crl.pem
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Get contents of CA certificate
-  slurp: src=/etc/openvpn/ca.crt
+  become: yes
+  slurp:
+    src: /etc/openvpn/ca.crt
   register: ca_certificate
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Create client configuration template
-  template: >
-    src=client.ovpn.j2
-    dest=/etc/openvpn/client.ovpn
-    owner=root
-    group=root
-    mode=0644
+  become: yes
+  template:
+    src: client.ovpn.j2
+    dest: /etc/openvpn/client.ovpn
+    owner: root
+    group: root
+    mode: 0644
   when: openvpn_server and not openvpn_static
-  tags: openvpn
+  tags:
+    - openvpn
 
 - name: Ensure OpenVPN service is started and enabled on boot
-  service: name={{ openvpn_service_name }} state=started enabled=yes
-  tags: openvpn
+  become: yes
+  service:
+    name: "{{ openvpn_service_name }}"
+    state: started
+    enabled: yes
+  tags:
+    - openvpn

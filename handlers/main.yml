@@ -2,5 +2,9 @@
 # handlers file for openvpn
 
 - name: restart openvpn
-  service: name={{ openvpn_service_name }} state=restarted
-  tags: openvpn
+  become: yes
+  service:
+    name: "{{ openvpn_service_name }}"
+    state: restarted
+  tags:
+    - openvpn
