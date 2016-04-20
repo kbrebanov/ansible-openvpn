@@ -1,7 +1,7 @@
 openvpn
 =======
 
-[![Ansible Role](https://img.shields.io/ansible/role/5761.svg)](https://galaxy.ansible.com/list#/roles/5761)
+[![Build Status](https://travis-ci.org/kbrebanov/ansible-openvpn.svg?branch=master)](https://travis-ci.org/kbrebanov/ansible-openvpn)
 
 Installs and configures OpenVPN
 

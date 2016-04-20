@@ -1,0 +1,7 @@
+i---
+- hosts: localhost
+  remote_user: root
+  vars:
+    openvpn_server: true
+  roles:
+    - ansible-openvpn
