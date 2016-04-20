@@ -78,7 +78,7 @@ Example Playbook
 ----------------
 
 Install OpenVPN server and use static key tunnel
-```
+```yaml
 - hosts: all
   vars:
     openvpn_server: true
@@ -88,7 +88,7 @@ Install OpenVPN server and use static key tunnel
 ```
 
 Install older version of OpenVPN server and use static key tunnel
-```
+```yaml
 - hosts: all
   vars:
     openvpn_version: 2.3.6
@@ -99,7 +99,7 @@ Install older version of OpenVPN server and use static key tunnel
 ```
 
 Install OpenVPN client using static key tunnel
-```
+```yaml
 - hosts: all
   vars:
     openvpn_client: true
@@ -110,7 +110,7 @@ Install OpenVPN client using static key tunnel
 ```
 
 Install OpenVPN server using TLS and redirect all client traffic thru tunnel
-```
+```yaml
 - hosts: all
   vars:
     openvpn_server: true
@@ -120,7 +120,7 @@ Install OpenVPN server using TLS and redirect all client traffic thru tunnel
 ```
 
 Install OpenVPN client using TLS
-```
+```yaml
 - hosts: all
   vars:
     openvpn_client: true
