@@ -1,6 +1,12 @@
 ---
 # handlers file for openvpn
 
+- name: reload systemd
+  become: yes
+  command: systemctl daemon-reload
+  tags:
+    - openvpn
+
 - name: restart openvpn
   become: yes
   service:

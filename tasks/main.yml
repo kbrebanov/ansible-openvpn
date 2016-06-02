@@ -24,6 +24,21 @@
     owner: root
     group: root
     mode: 0644
+  when: ansible_distribution_release == "trusty"
+  tags:
+    - openvpn
+
+- name: Create OpenVPN defaults configuration file
+  become: yes
+  template:
+    src: openvpn.default.j2
+    dest: /etc/default/openvpn
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution_release == "xenial"
+  notify:
+    - reload systemd
   tags:
     - openvpn
 

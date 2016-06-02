@@ -15,6 +15,9 @@
 {% if openvpn_client %}
 AUTOSTART="client"
 {% endif %}
+{% if openvpn_server %}
+AUTOSTART="server"
+{% endif %}
 #
 # Refresh interval (in seconds) of default status files
 # located in /var/run/openvpn.$NAME.status

@@ -12,7 +12,7 @@
 - name: Add OpenVPN repository
   become: yes
   apt_repository:
-    repo: 'deb http://swupdate.openvpn.net/apt trusty main'
+    repo: 'deb http://swupdate.openvpn.net/apt {{ ansible_distribution_release }} main'
     state: present
   tags:
     - openvpn
