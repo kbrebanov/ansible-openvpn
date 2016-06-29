@@ -27,3 +27,17 @@
     - "{{ openvpn_packages }}"
   tags:
     - openvpn
+
+- name: Fix Xenial systemd service unit file
+  become: yes
+  template:
+    src: openvpn@.service.j2
+    dest: /etc/systemd/system/openvpn@.service
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution_release == "xenial"
+  notify:
+    - reload systemd
+  tags:
+    - openvpn
