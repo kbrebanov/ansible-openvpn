@@ -33,7 +33,7 @@ Role Variables
 
 | Name                          | Default                                                       | Description                                                                                            |
 |:------------------------------|:--------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|
-| openvpn_version               | 2.3.10                                                        | Version of OpenVPN to install                                                                          |
+| openvpn_version               | 2.3.11                                                        | Version of OpenVPN to install                                                                          |
 | openvpn_static                | false                                                         | Enable to configure a static key tunnel instead of TLS                                                 |
 | openvpn_client                | false                                                         | Configure OpenVPN client                                                                               |
 | openvpn_server                | false                                                         | Configure OpenVPN server                                                                               |
