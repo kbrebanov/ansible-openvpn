@@ -32,7 +32,7 @@
   become: yes
   template:
     src: openvpn@.service.j2
-    dest: /etc/systemd/system/openvpn@.service
+    dest: /lib/systemd/system/openvpn@.service
     owner: root
     group: root
     mode: 0644
