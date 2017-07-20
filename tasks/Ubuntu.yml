@@ -4,7 +4,8 @@
 - name: Install OpenVPN GPG key
   become: yes
   apt_key:
-    url: https://swupdate.openvpn.net/repos/repo-public.gpg
+    id: '{{ openvpn_apt_signing_key }}'
+    keyserver: hkps.pool.sks-keyservers.net
     state: present
   tags:
     - openvpn
@@ -12,7 +13,7 @@
 - name: Add OpenVPN repository
   become: yes
   apt_repository:
-    repo: 'deb http://swupdate.openvpn.net/apt {{ ansible_distribution_release }} main'
+    repo: 'deb http://swupdate.openvpn.net/apt {{ openvpn_apt_repo_distro }} main'
     state: present
   tags:
     - openvpn
