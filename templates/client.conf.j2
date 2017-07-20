@@ -33,7 +33,7 @@ persist-tun
 ping-timer-rem
 {% endif %}
 proto {{ openvpn_proto }}
-{% if openvpn_pull %}
+{% if openvpn_client_pull %}
 pull
 {% endif %}
 {% if openvpn_static %}
