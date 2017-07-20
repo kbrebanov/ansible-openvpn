@@ -33,7 +33,7 @@ Role Variables
 
 | Name                          | Default                                                       | Description                                                                                            |
 |:------------------------------|:--------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|
-| openvpn_version               | 2.4.0                                                         | Version of OpenVPN to install                                                                          |
+| openvpn_version               | 2.4.0 on Ubuntu, 2.3.1 otherwise                              | Version of OpenVPN to install                                                                          |
 | openvpn_apt_repo_distro       | "{{ ansible_distribution_release }}"                          | Ubuntu APT distribution release override                                                               |
 | openvpn_apt_signing_key       | 8E6DA8B4E158C569                                              | Ubuntu APT signing key fingerprint                                                                     |
 | openvpn_static                | false                                                         | Enable to configure a static key tunnel instead of TLS                                                 |

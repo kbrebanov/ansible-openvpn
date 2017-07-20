@@ -6,7 +6,7 @@
 # apt cache errors
 openvpn_apt_repo_distro: '{{ ansible_distribution_release }}'
 # Always use the latest version available for the distro specified above
-openvpn_version: 2.4.0
+openvpn_version: 2.3.1
 openvpn_apt_signing_key: 8E6DA8B4E158C569
 
 openvpn_static: false
