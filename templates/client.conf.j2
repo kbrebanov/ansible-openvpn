@@ -17,6 +17,9 @@ ifconfig {{ openvpn_client_ifconfig }}
 {% if openvpn_keepalive %}
 keepalive {{ openvpn_keepalive }}
 {% endif %}
+{% if openvpn_mssfix %}
+mssfix {{ openvpn_mssfix }}
+{% endif %}
 {% if openvpn_nobind %}
 nobind
 {% endif %}
@@ -28,6 +31,12 @@ persist-key
 {% endif %}
 {% if openvpn_persist_tun %}
 persist-tun
+{% endif %}
+{% if openvpn_tun_mtu %}
+tun_mtu {{ openvpn_tun_mtu }}
+{% endif %}
+{% if openvpn_tun_mtu_extra %}
+tun_mtu_extra {{ openvpn_tun_mtu_extra }}
 {% endif %}
 {% if openvpn_ping_timer_rem %}
 ping-timer-rem
