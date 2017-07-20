@@ -33,10 +33,10 @@ persist-key
 persist-tun
 {% endif %}
 {% if openvpn_tun_mtu %}
-tun_mtu {{ openvpn_tun_mtu }}
+tun-mtu {{ openvpn_tun_mtu }}
 {% endif %}
 {% if openvpn_tun_mtu_extra %}
-tun_mtu_extra {{ openvpn_tun_mtu_extra }}
+tun-mtu-extra {{ openvpn_tun_mtu_extra }}
 {% endif %}
 {% if openvpn_ping_timer_rem %}
 ping-timer-rem
