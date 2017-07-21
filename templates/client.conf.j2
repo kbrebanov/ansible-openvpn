@@ -23,6 +23,9 @@ mssfix {{ openvpn_mssfix }}
 {% if openvpn_nobind %}
 nobind
 {% endif %}
+{% if openvpn_remote_cert_tls %}
+remote-cert-tls {{ openvpn_remote_cert_tls }}
+{% endif %}
 {% if openvpn_ns_cert_type %}
 ns-cert-type {{ openvpn_ns_cert_type }}
 {% endif %}
@@ -74,4 +77,10 @@ verb {{ openvpn_verb }}
 <key>
 {{ openvpn_client_key }}
 </key>
+{% endif %}
+{% if openvpn_tls_auth_key %}
+key-direction {{ openvpn_tls_auth_key_direction }}
+<tls-auth>
+{{ openvpn_tls_auth_key }}
+</tls-auth>
 {% endif %}

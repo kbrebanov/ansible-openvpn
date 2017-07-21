@@ -31,6 +31,9 @@ openvpn_ifconfig_pool_persist: ipp.txt
 openvpn_keepalive: '10 60'
 openvpn_nobind: true
 openvpn_ns_cert_type: ''
+openvpn_remote_cert_tls: ''
+openvpn_tls_auth_key_direction: 1
+openvpn_tls_auth_key: ''
 openvpn_persist_key: true
 openvpn_persist_tun: true
 openvpn_ping_timer_rem: true
