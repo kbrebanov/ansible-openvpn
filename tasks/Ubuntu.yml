@@ -9,14 +9,16 @@
     state: present
   tags:
     - openvpn
+  when: openvpn_apt_repo_distro != ""
 
 - name: Add OpenVPN repository
   become: yes
   apt_repository:
-    repo: 'deb http://swupdate.openvpn.net/apt {{ openvpn_apt_repo_distro }} main'
+    repo: 'deb http://build.openvpn.net/debian/openvpn/release/{{ openvpn_version }} {{ openvpn_apt_repo_distro }} main'
     state: present
   tags:
     - openvpn
+  when: openvpn_apt_repo_distro != ""
 
 - name: Install OpenVPN packages
   become: yes
