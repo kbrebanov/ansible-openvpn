@@ -6,3 +6,4 @@ openvpn_packages:
 openvpn_service_name: openvpn
 openvpn_user: nobody
 openvpn_group: nogroup
+openvpn_version: 2.4

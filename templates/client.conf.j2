@@ -17,8 +17,14 @@ ifconfig {{ openvpn_client_ifconfig }}
 {% if openvpn_keepalive %}
 keepalive {{ openvpn_keepalive }}
 {% endif %}
+{% if openvpn_mssfix %}
+mssfix {{ openvpn_mssfix }}
+{% endif %}
 {% if openvpn_nobind %}
 nobind
+{% endif %}
+{% if openvpn_remote_cert_tls %}
+remote-cert-tls {{ openvpn_remote_cert_tls }}
 {% endif %}
 {% if openvpn_ns_cert_type %}
 ns-cert-type {{ openvpn_ns_cert_type }}
@@ -29,11 +35,17 @@ persist-key
 {% if openvpn_persist_tun %}
 persist-tun
 {% endif %}
+{% if openvpn_tun_mtu %}
+tun-mtu {{ openvpn_tun_mtu }}
+{% endif %}
+{% if openvpn_tun_mtu_extra %}
+tun-mtu-extra {{ openvpn_tun_mtu_extra }}
+{% endif %}
 {% if openvpn_ping_timer_rem %}
 ping-timer-rem
 {% endif %}
 proto {{ openvpn_proto }}
-{% if openvpn_pull %}
+{% if openvpn_client_pull %}
 pull
 {% endif %}
 {% if openvpn_static %}
@@ -65,4 +77,10 @@ verb {{ openvpn_verb }}
 <key>
 {{ openvpn_client_key }}
 </key>
+{% endif %}
+{% if openvpn_tls_auth_key %}
+key-direction {{ openvpn_tls_auth_key_direction }}
+<tls-auth>
+{{ openvpn_tls_auth_key }}
+</tls-auth>
 {% endif %}

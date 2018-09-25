@@ -35,7 +35,9 @@ Role Variables
 
 | Name                          | Default                                                       | Description                                                                                            |
 |:------------------------------|:--------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|
-| openvpn_version               | 2.3.11                                                        | Version of OpenVPN to install                                                                          |
+| openvpn_version               | 2.4.0 on Ubuntu, 2.3.1 otherwise                              | Version of OpenVPN to install                                                                          |
+| openvpn_apt_repo_distro       | "{{ ansible_distribution_release }}"                          | Ubuntu APT distribution release override; if empty, use native packages                                |
+| openvpn_apt_signing_key       | 8E6DA8B4E158C569                                              | Ubuntu APT signing key fingerprint to install, if `openvpn_apt_repo_distro` isn't empty                |
 | openvpn_static                | false                                                         | Enable to configure a static key tunnel instead of TLS                                                 |
 | openvpn_client                | false                                                         | Configure OpenVPN client                                                                               |
 | openvpn_server                | false                                                         | Configure OpenVPN server                                                                               |
@@ -51,13 +53,15 @@ Role Variables
 | openvpn_dhcp_option_dns       | ["208.67.222.222", "208.67.220.220"]                          | DNS server addresses to push to client in TLS mode                                                     |
 | openvpn_ifconfig_pool_persist | ipp.txt                                                       | Persist/unpersist ifconfig-pool data to file                                                           |
 | openvpn_keepalive             | '10 60'                                                       | Set timeouts                                                                                           |
+| openvpn_mssfix                |                                                               | Set max send packet size on encapsulated TCP tunnels                                                   |
 | openvpn_nobind                | true                                                          | Do not bind to local address and port                                                                  |
 | openvpn_ns_cert_type          | ''                                                            | Require that peer certificate was signed with explicit nsCertType designation of "client" or "server"  |
 | openvpn_persist_key           | true                                                          | Don't re-read key files across SIGUSR1 or --ping-restart                                               |
 | openvpn_persist_tun           | true                                                          | Don't close and reopen TUN/TAP device or run up/down scripts across SIGUSR1 or --ping-restart restarts |
 | openvpn_ping_timer_rem        | true                                                          | Run the --ping-exit / --ping-restart timer only if we have a remote address                            |
-| openvpn_proto                 | udp                                                           | Protocol to use for communicating with remote host                                                     |
+| openvpn_proto                 | udp                                                           | Protocol to use for communicating with remote host, "udp" or "tcp-client"                              |
 | openvpn_redirect_gateway      | false                                                         | Enable to redirect all client traffic thru VPN tunnel                                                  |
+| openvpn_remote_cert_tls       | ''                                                            | Force validation of remote certificate                                                                 |
 | openvpn_remote_host           | ''                                                            | Remote host name or IP address                                                                         |
 | openvpn_remote_port           | 1194                                                          | Remote host port                                                                                       |
 | openvpn_remote_proto          | "{{ openvpn_proto }}"                                         | Remote host protocol                                                                                   |
@@ -66,6 +70,10 @@ Role Variables
 | openvpn_server_subnet         | 10.8.0.0                                                      | OpenVPN TLS server subnet address                                                                      |
 | openvpn_server_subnet_mask    | 255.255.255.0                                                 | OpenVPN TLS server subnet mask                                                                         |
 | openvpn_status                | openvpn-status.log                                            | Write operational status to file                                                                       |
+| openvpn_tls_auth_key          | ''                                                            | Contents of TLS HMAC verification key (see manual)                                                     |
+| openvpn_tls_auth_key_direction| ''                                                            | Direction of the TLS HMAC verification key (see manual)                                                |
+| openvpn_tun_mtu               | 1500                                                          | MTU to set on the tunnel                                                                               |
+| openvpn_tun_mtu_extra         | 0                                                             | Internal buffer MTU correction factor, see OpenVPN documentation                                       |
 | openvpn_verb                  | 1                                                             | Set output verbosity                                                                                   |
 | openvpn_ca_certificate        | ''                                                            | Specify CA certificate content for client configuration                                                |
 | openvpn_client_certificate    | ''                                                            | Specify client certificate content for client configuration                                            |
